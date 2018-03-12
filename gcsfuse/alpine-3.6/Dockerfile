@@ -5,6 +5,9 @@ RUN         apk add --no-cache --virtual .build-deps \
             go get -u github.com/googlecloudplatform/gcsfuse && \
             mkdir -p /rootfs/usr/local/bin/ && \
             mv $GOPATH/bin/gcsfuse /usr/local/bin/gcsfuse && \
+            apk --no-cache add --virtual .run-deps \
+                fuse \
+                ca-certificates && \
             apk del .build-deps && \
             mkdir -p /data
 
