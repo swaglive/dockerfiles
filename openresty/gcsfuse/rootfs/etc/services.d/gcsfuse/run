@@ -1,0 +1,2 @@
+#!/usr/bin/with-contenv sh
+gcsfuse --foreground $GCSFUSE_OPTIONS $GOOGLE_CLOUD_STORAGE_BUCKET /usr/share/nginx/html
