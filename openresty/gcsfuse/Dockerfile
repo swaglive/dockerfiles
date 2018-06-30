@@ -14,7 +14,8 @@ FROM        openresty/openresty:alpine
 ENV         S6_BEHAVIOUR_IF_STAGE2_FAILS 2
 ENV         S6_CMD_WAIT_FOR_SERVICES 1
 
-RUN         mkdir -p /usr/share/nginx/html
+RUN         mkdir -p /usr/share/nginx/html && \
+            rm -rf /etc/nginx/conf.d/*
 EXPOSE      80/tcp
 ENTRYPOINT  ["/init"]
 CMD         ["nginx", "-c", "/etc/nginx/nginx.conf", "-g", "daemon off;"]
