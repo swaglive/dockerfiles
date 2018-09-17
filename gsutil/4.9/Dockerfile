@@ -12,8 +12,8 @@ RUN             apk add --no-cache --virtual .build-deps \
                 find /gsutil -type f -name "*.pyc" -delete && \
                 find /gsutil -type f -name "*.pyo" -delete && \
                 find /gsutil -type d -name "__pycache__" -delete && \
-                chmod +x gsutil/gsutil && \
-                mv gsutil/ /usr/local/bin && \
+                mv gsutil/* /usr/local/bin && \
+                chmod +x /usr/local/bin/gsutil && \
                 apk add --no-cache --virtual .run-deps \
                     python \
                     py-crcmod \
