@@ -24,13 +24,11 @@ RUN         apk add --no-cache --virtual .build-deps \
                 lcms2-dev \
                 libwebp-dev \
                 openjpeg-dev \
-                libmemcached-dev \
-                # libraqm-dev \
-                linux-headers && \
+                # libraqm-dev
+                libmemcached-dev && \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .build-deps \
                 libimagequant-dev && \
             pip install tornado==5.1.1 greenlet==0.4.15 && \
-            UWSGI_EMBED_PLUGINS=tornado,greenlet pip install uwsgi==2.0.17.1 && \
             pip install \
                 thumbor==6.6.0 \
                 tc-core==0.4.0 \
