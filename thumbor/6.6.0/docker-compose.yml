@@ -1,8 +1,6 @@
 version: '3.7'
 services:
   thumbor:
-    # entrypoint: dockerize -no-overwrite -template thumbor.conf.py.tmpl:thumbor.conf.py thumbor
-    # command: -l debug --use-environment 1
     build: .
     environment:
       SECURITY_KEY: my-SECURITY_KEY
