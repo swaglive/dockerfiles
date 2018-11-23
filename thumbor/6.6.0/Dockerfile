@@ -6,8 +6,12 @@ RUN         wget -q -O - https://github.com/jwilder/dockerize/releases/download/
 
 ###
 
-FROM        python:2.7.15-alpine3.8
+FROM        python:3.6.7-alpine3.8
 
+ENV         PYTHONPATH=/usr/src/app/lib
+ENV         PYTHONOPTIMIZE=2
+
+WORKDIR     /usr/src/app
 EXPOSE      8888/tcp
 ENTRYPOINT  ["dockerize", "-no-overwrite", "-template", "thumbor.conf.py.tmpl:thumbor.conf.py", "thumbor"]
 CMD         ["-l", "debug", "-c", "thumbor.conf.py"]
@@ -28,9 +32,11 @@ RUN         apk add --no-cache --virtual .build-deps \
                 libmemcached-dev && \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .build-deps \
                 libimagequant-dev && \
-            pip install tornado==5.1.1 greenlet==0.4.15 && \
             pip install \
                 thumbor==6.6.0 \
+                tornado==5.1.1 \
+                greenlet==0.4.15 \
+                python-rapidjson==0.6.3 \
                 tc-core==0.4.0 \
                 # Memcached Storage
                 thumbor-memcached==5.1.0 \
@@ -58,5 +64,10 @@ RUN         apk add --no-cache --virtual .build-deps \
             CC="cc -mavx2" pip -v install --force-reinstall pillow-simd==5.3.0.post0 \
                 --global-option="build_ext" --global-option="--debug" && \
             apk del .build-deps
+
+            # HACK - Python 3
+RUN         sed -i 's/basestring = str/basestring = bytes/g' /usr/local/lib/python3.6/site-packages/thumbor/server.py
+            # HACK - Rapidjson
+COPY        json.py lib/json.py
 
 COPY        thumbor.conf.py thumbor.conf.py.tmpl
