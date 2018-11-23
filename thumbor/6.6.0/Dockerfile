@@ -1,5 +1,7 @@
 FROM        python:3.6.7-alpine3.8
 
+ARG         SIMD_LEVEL=sse4
+
 ENV         PYTHONPATH=/usr/src/app/lib
 ENV         PYTHONOPTIMIZE=2
 
@@ -53,7 +55,7 @@ RUN         apk add --no-cache --virtual .build-deps \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .run-deps \
                 libimagequant && \
             pip uninstall -y pillow && \
-            CC="cc -msse4" pip -v install --force-reinstall pillow-simd==5.3.0.post0 \
+            CC="cc -m$SIMD_LEVEL" pip -v install --force-reinstall pillow-simd==5.3.0.post0 \
                 --global-option="build_ext" --global-option="--debug" && \
             apk del .build-deps
 
