@@ -1,11 +1,3 @@
-FROM        alpine:3.8 as dockerize
-
-ENV         VERSION=0.6.1
-RUN         wget -q -O - https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-alpine-linux-amd64-v$VERSION.tar.gz | tar xz -C /usr/local/bin && \
-            chmod +x /usr/local/bin/dockerize
-
-###
-
 FROM        python:3.6.7-alpine3.8
 
 ENV         PYTHONPATH=/usr/src/app/lib
@@ -16,7 +8,7 @@ EXPOSE      8888/tcp
 ENTRYPOINT  ["dockerize", "-no-overwrite", "-template", "thumbor.conf.py.tmpl:thumbor.conf.py", "thumbor"]
 CMD         ["-l", "debug", "-c", "thumbor.conf.py"]
 
-COPY        --from=dockerize /usr/local/bin/dockerize /usr/local/bin/dockerize
+COPY        --from=swaglive/dockerize:0.6.1 /usr/local/bin/dockerize /usr/local/bin/dockerize
 
 RUN         apk add --no-cache --virtual .build-deps \
                 build-base \
