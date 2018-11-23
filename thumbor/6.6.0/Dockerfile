@@ -61,7 +61,7 @@ RUN         apk add --no-cache --virtual .build-deps \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .run-deps \
                 libimagequant && \
             pip uninstall -y pillow && \
-            CC="cc -mavx2" pip -v install --force-reinstall pillow-simd==5.3.0.post0 \
+            CC="cc -msse4" pip -v install --force-reinstall pillow-simd==5.3.0.post0 \
                 --global-option="build_ext" --global-option="--debug" && \
             apk del .build-deps
 
