@@ -26,7 +26,7 @@ RUN         apk add --no-cache --virtual .build-deps \
                 libmemcached-dev && \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .build-deps \
                 libimagequant-dev && \
-            pip install \
+            pip install --no-binary thumbor \
                 thumbor==6.6.0 \
                 tornado==5.1.1 \
                 greenlet==0.4.15 \
@@ -55,7 +55,7 @@ RUN         apk add --no-cache --virtual .build-deps \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .run-deps \
                 libimagequant && \
             pip uninstall -y pillow && \
-            CC="cc -m$SIMD_LEVEL" pip -v install --force-reinstall pillow-simd==5.3.0.post0 \
+            CC="cc -m$SIMD_LEVEL" pip -v install --force-reinstall --no-binary pillow-simd pillow-simd==5.3.0.post0 \
                 --global-option="build_ext" --global-option="--debug" && \
             apk del .build-deps
 
