@@ -11,13 +11,13 @@ services:
       RESULT_STORAGE: tc_redis.result_storages.redis_result_storage
       REDIS_RESULT_STORAGE_SERVER_HOST: redis
       RESULT_STORAGE_EXPIRATION_SECONDS: 60
-      RESULT_STORAGE_STORES_UNSAFE: 0
+      RESULT_STORAGE_STORES_UNSAFE: 1
       REDIS_RESULT_STORAGE_IGNORE_ERRORS: 1
-      # DETECTORS: thumbor.detectors.queued_detector.queued_complete_detector
-      # REDIS_QUEUE_SERVER_HOST: redis
-      # REDIS_QUEUE_SERVER_PORT: 6379
-      # REDIS_QUEUE_SERVER_DB: 1
-      # MIXED_STORAGE_DETECTOR_STORAGE: tc_redis.storages.redis_storage
+      # DETECTORS: thumbor.detectors.queued_detector.queued_complete_detector thumbor.detectors.queued_detector.queued_face_detector thumbor.detectors.queued_detector.queued_feature_detector
+      # DETECTORS: thumbor.detectors.face_detector thumbor.detectors.feature_detector
+      REDIS_QUEUE_SERVER_HOST: redis
+      REDIS_QUEUE_SERVER_PORT: 6379
+      REDIS_QUEUE_SERVER_DB: 1
     ports:
     - "8888:8888"
     depends_on:
