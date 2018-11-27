@@ -22,11 +22,12 @@ RUN         apk add --no-cache --virtual .build-deps \
                 lcms2-dev \
                 libwebp-dev \
                 openjpeg-dev \
+                libpng-dev \
                 # libraqm-dev
                 libmemcached-dev && \
             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .build-deps \
                 libimagequant-dev && \
-            pip install --no-binary thumbor \
+            pip install \
                 thumbor==6.6.0 \
                 tornado==5.1.1 \
                 greenlet==0.4.15 \
@@ -46,6 +47,7 @@ RUN         apk add --no-cache --virtual .build-deps \
                 openjpeg \
                 libjpeg-turbo \
                 libjpeg-turbo-utils \
+                libpng \
                 freetype \
                 libwebp \
                 zlib \
@@ -57,12 +59,14 @@ RUN         apk add --no-cache --virtual .build-deps \
             pip uninstall -y pillow && \
             CC="cc -m$SIMD_LEVEL" pip -v install --force-reinstall --no-binary pillow-simd pillow-simd==5.3.0.post0 \
                 --global-option="build_ext" --global-option="--debug" && \
-            apk del .build-deps
+            apk del --no-cache .build-deps
 
             # HACK - Python 3 support
 RUN         sed -i 's/basestring = str/basestring = bytes/g' /usr/local/lib/python3.6/site-packages/thumbor/server.py && \
             sed -i "s/return encode_url(unquote(url).decode('utf-8'))/return encode_url(unquote(url))/g" /usr/local/lib/python3.6/site-packages/thumbor/loaders/http_loader.py && \
-            sed -i "s/buffer.startswith('/buffer.startswith(b'/g" /usr/local/lib/python3.6/site-packages/thumbor/engines/__init__.py
+            sed -i "s/buffer.startswith('/buffer.startswith(b'/g" /usr/local/lib/python3.6/site-packages/thumbor/engines/__init__.py && \
+            sed -i "s/.replace(b'\\\0', '')/.replace(b'\\\0', b'').decode('utf-8')/g" /usr/local/lib/python3.6/site-packages/thumbor/engines/__init__.py && \
+            sed -i "s/' in e.message:/' in str(e):/g" /usr/local/lib/python3.6/site-packages/thumbor/handlers/__init__.py
 
             # HACK - rapidjson replacement for json
 COPY        json.py lib/json.py
