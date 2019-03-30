@@ -1,6 +1,6 @@
 FROM        alpine:3.8 as builder
 
-ARG         VERSION=7.3.0.1023-1
+ARG         VERSION=7.6.0.1059-1
 
 RUN         apk add --no-cache --virtual .build-deps \
                 curl ca-certificates && \
