@@ -6,6 +6,8 @@ services:
       SECURITY_KEY: my-SECURITY_KEY
       OPTIMIZERS: thumbor.optimizers.jpegtran thumbor.optimizers.gifv
       PROGRESSIVE_JPEG: 1
+      LOADER: tc_video.loaders.http_loader
+      FFMPEG_PATH: /usr/bin/ffmpeg
       STORAGE: tc_redis.storages.redis_storage
       REDIS_STORAGE_SERVER_HOST: redis
       RESULT_STORAGE: tc_redis.result_storages.redis_result_storage

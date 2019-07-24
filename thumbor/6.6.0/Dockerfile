@@ -42,7 +42,9 @@ RUN         apk add --no-cache --virtual .build-deps \
                 hiredis==0.2.0 \
                 # Mongo Storage
                 tc_mongodb==5.1.0 \
-                pymongo==3.7.2 && \
+                pymongo==3.7.2 \
+                # Thumbor-video
+                https://github.com/swaglive/thumbor-video/archive/master.zip && \
             apk add --no-cache --virtual .run-deps \
                 openjpeg \
                 libjpeg-turbo \
