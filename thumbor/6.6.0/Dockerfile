@@ -1,4 +1,4 @@
-FROM        python:3.6.7-alpine3.8
+FROM        python:3.6.9-alpine3.10
 
 ARG         SIMD_LEVEL=sse4
 
