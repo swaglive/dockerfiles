@@ -15,6 +15,7 @@ COPY        --from=swaglive/dockerize:0.6.1 /usr/local/bin/dockerize /usr/local/
 RUN         apk add --no-cache --virtual .build-deps \
                 build-base \
                 curl-dev \
+                libcurl \
                 libjpeg-turbo-dev \
                 zlib-dev \
                 tiff-dev \
@@ -47,6 +48,7 @@ RUN         apk add --no-cache --virtual .build-deps \
                 https://github.com/swaglive/thumbor-video/archive/60a4f843b2430fcf6903fd9b34e615143155ecd3.zip && \
             apk add --no-cache --virtual .run-deps \
                 openjpeg \
+                libcurl \
                 libjpeg-turbo \
                 libjpeg-turbo-utils \
                 libpng \
