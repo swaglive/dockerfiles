@@ -32,6 +32,7 @@ RUN         apk add --no-cache --virtual .build-deps \
                 libimagequant-dev && \
             pip install \
                 thumbor==6.6.0 \
+                pycurl==7.43.0.3 \
                 tornado==5.1.1 \
                 greenlet==0.4.15 \
                 python-rapidjson==0.6.3 \
