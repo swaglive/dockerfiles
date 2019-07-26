@@ -3,8 +3,14 @@ workflow "Build and Push Docker Image" {
   resolves = ["Docker - Push Image"]
 }
 
+action "Check" {
+  uses = "nholden/modified-file-filter-action@master"
+  args = ["thumbor/*"]
+}
+
 action "Docker - Build Image" {
   uses = "actions/docker/cli@master"
+  needs = ["Check"]
   args = ["build", "-t", "swaglive/thumbor:6.6.0", "thumbor/6.6.0"]
 }
 
