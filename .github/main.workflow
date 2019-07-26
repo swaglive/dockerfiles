@@ -1,11 +1,8 @@
 workflow "Push" {
   on = "push"
-  resolves = [
-    "Run Echo"
-  ]
+  resolves = ["HTTP client"]
 }
 
-action "Run Echo" {
-  uses = "./"
-  args = "echo push or "
+action "HTTP client" {
+  uses = "swinton/httpie.action@69125d73caa2c6821f6a41a86112777a37adc171"
 }
