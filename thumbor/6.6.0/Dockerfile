@@ -4,6 +4,7 @@ ARG         SIMD_LEVEL=sse4
 
 ENV         PYTHONPATH=/usr/src/app/lib
 ENV         PYTHONOPTIMIZE=2
+
 WORKDIR     /usr/src/app
 EXPOSE      8888/tcp
 ENTRYPOINT  ["dockerize", "-no-overwrite", "-template", "thumbor.conf.py.tmpl:thumbor.conf.py", "thumbor"]
