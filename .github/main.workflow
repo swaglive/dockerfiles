@@ -1,6 +1,6 @@
 workflow "Push" {
   on = "push"
-  resolves = ["GitHub Action for Docker"]
+  resolves = ["Docker - Push Image"]
 }
 
 action "Docker - Build Image" {
@@ -14,8 +14,8 @@ action "Docker - Login" {
   secrets = ["DOCKER_USERNAME", "DOCKER_PASSWORD"]
 }
 
-action "GitHub Action for Docker" {
-  uses = "actions/docker/cli@86ff551d26008267bb89ac11198ba7f1d807b699"
+action "Docker - Push Image" {
+  uses = "actions/docker/cli@master"
   needs = ["Docker - Login"]
   args = ["push", "swaglive/thumbor:6.6.0"]
 }
