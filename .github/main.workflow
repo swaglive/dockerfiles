@@ -1,9 +1,9 @@
 workflow "New workflow" {
   on = "push"
-  resolves = ["GitHub Action for Docker"]
+  resolves = ["Build Docker image"]
 }
 
-action "GitHub Action for Docker" {
+action "Build Docker image" {
   uses = "actions/docker/cli@master"
   args = ["build", "-f", "thumbor/6.6.0/Dockerfile", "."]
 }
