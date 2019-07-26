@@ -4,7 +4,6 @@ ARG         SIMD_LEVEL=sse4
 
 ENV         PYTHONPATH=/usr/src/app/lib
 ENV         PYTHONOPTIMIZE=2
-ENV         PYCURL_SSL_LIBRARY=openssl
 WORKDIR     /usr/src/app
 EXPOSE      8888/tcp
 ENTRYPOINT  ["dockerize", "-no-overwrite", "-template", "thumbor.conf.py.tmpl:thumbor.conf.py", "thumbor"]
@@ -12,10 +11,13 @@ CMD         ["-l", "debug", "-c", "thumbor.conf.py"]
 
 COPY        --from=swaglive/dockerize:0.6.1 /usr/local/bin/dockerize /usr/local/bin/dockerize
 
+RUN         apk add --no-cache --virtual .run-deps \
+              libcurl
+
+ENV         PYCURL_SSL_LIBRARY=openssl
 RUN         apk add --no-cache --virtual .build-deps \
                 build-base \
                 curl-dev \
-                libcurl \
                 libjpeg-turbo-dev \
                 zlib-dev \
                 tiff-dev \
@@ -48,7 +50,6 @@ RUN         apk add --no-cache --virtual .build-deps \
                 https://github.com/swaglive/thumbor-video/archive/60a4f843b2430fcf6903fd9b34e615143155ecd3.zip && \
             apk add --no-cache --virtual .run-deps \
                 openjpeg \
-                libcurl \
                 libjpeg-turbo \
                 libjpeg-turbo-utils \
                 libpng \
