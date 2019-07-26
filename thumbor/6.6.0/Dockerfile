@@ -11,10 +11,6 @@ CMD         ["-l", "debug", "-c", "thumbor.conf.py"]
 
 COPY        --from=swaglive/dockerize:0.6.1 /usr/local/bin/dockerize /usr/local/bin/dockerize
 
-RUN         apk add --no-cache --virtual .run-deps \
-              libcurl
-
-ENV         PYCURL_SSL_LIBRARY=openssl
 RUN         apk add --no-cache --virtual .build-deps \
                 build-base \
                 curl-dev \
@@ -26,10 +22,9 @@ RUN         apk add --no-cache --virtual .build-deps \
                 libwebp-dev \
                 openjpeg-dev \
                 libpng-dev \
-                # libraqm-dev
                 libmemcached-dev && \
-            apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .build-deps \
-                libimagequant-dev && \
+            # apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .build-deps \
+            #     libimagequant-dev
             pip install \
                 thumbor==6.6.0 \
                 pycurl==7.43.0.3 \
@@ -60,8 +55,8 @@ RUN         apk add --no-cache --virtual .build-deps \
                 gifsicle \
                 tiff \
                 ffmpeg && \
-            apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .run-deps \
-                libimagequant && \
+#             apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --virtual .run-deps \
+#                 libimagequant && \
             pip uninstall -y pillow && \
             CC="cc -m$SIMD_LEVEL" pip -v install --force-reinstall --no-binary pillow-simd pillow-simd==5.3.0.post0 \
                 --global-option="build_ext" --global-option="--debug" && \

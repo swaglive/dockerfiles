@@ -4,6 +4,6 @@ workflow "Push" {
 }
 
 action "Build Docker Image" {
-  uses = "actions/docker/cli@86ff551d26008267bb89ac11198ba7f1d807b699"
-  args = "build -f thumbor/6.6.0/Dockerfile ."
+  uses = "actions/docker/cli@master"
+  args = ["build", "-t", "swaglive/thumbor:6.6.0", "thumbor/6.6.0"]
 }
