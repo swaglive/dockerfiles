@@ -29,7 +29,7 @@ jobs:
         - 'kubectl:1.11'
         - 'mongocloud-backup-agent:7.6'
         - 'mongocloud-monitoring-agent:7.2'
-        - 'nsenter-alpine-3.8'
+        - 'nsenter:alpine-3.8'
         - 'opencv:3.4.4-py3.6-alpine3.8'
         - 'openresty:gcsfuse'
         - 'openvpn:2.4.6'
