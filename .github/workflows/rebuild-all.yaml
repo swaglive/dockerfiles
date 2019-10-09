@@ -23,6 +23,7 @@ jobs:
         - 'google-cloud-storage:0.2.0'
         - 'gsutil:4.34'
         - 'gsutil:4.9'
+        - 'gsutil:4.9-alpine-3.10.2'
         - 'imagemagick:alpine-3.9'
         - 'kubectl:1.10'
         - 'kubectl:1.10-alpine3.7'
