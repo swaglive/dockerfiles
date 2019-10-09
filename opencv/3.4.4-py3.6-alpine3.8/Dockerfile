@@ -5,7 +5,7 @@ ENV             VERSION="3.4.4"
 RUN             mkdir -p /usr/src/app && \
                 wget -q -O - https://github.com/opencv/opencv/archive/${VERSION}.tar.gz | tar xz -C /usr/src/app && \
                 wget -q -O - https://github.com/opencv/opencv_contrib/archive/${VERSION}.tar.gz | tar xz -C /usr/src/app && \
-
+                apk update && apk upgrade && \
                 apk add --no-cache --virtual .build-deps \
                     build-base \
                     ninja \
