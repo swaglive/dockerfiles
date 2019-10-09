@@ -1,14 +1,14 @@
-name: dockerize
+name: gcsfuse
 
 on:
   push:
     paths:
-    - 'dockerize/**'
+    - 'gcsfuse/**'
     branches:
     - 'master'
 env: 
-  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/dockerize
-  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/dockerize
+  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/gcsfuse
+  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/gcsfuse
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
-      run: docker build dockerize/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
+      run: docker build gcsfuse/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
     - name: Push to Github
       run: |
           docker login docker.pkg.github.com -u $DOCKER_USERNAME -p $GH_AUTH

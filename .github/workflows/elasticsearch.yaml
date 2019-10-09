@@ -1,14 +1,14 @@
-name: dockerize
+name: elasticsearch
 
 on:
   push:
     paths:
-    - 'dockerize/**'
+    - 'elasticsearch/**'
     branches:
     - 'master'
 env: 
-  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/dockerize
-  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/dockerize
+  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/elasticsearch
+  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/elasticsearch
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
-      run: docker build dockerize/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
+      run: docker build elasticsearch/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
     - name: Push to Github
       run: |
           docker login docker.pkg.github.com -u $DOCKER_USERNAME -p $GH_AUTH

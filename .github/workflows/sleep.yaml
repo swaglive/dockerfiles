@@ -1,21 +1,22 @@
-name: dockerize
+name: sleep
 
 on:
   push:
     paths:
-    - 'dockerize/**'
+    - 'sleep/**'
     branches:
     - 'master'
+
 env: 
-  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/dockerize
-  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/dockerize
+  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/sleep
+  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/sleep
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['0.6.1']
+        version: ['4.9', '4.9-alpine-3.10.2', '4.34']
     env:
       GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
@@ -24,7 +25,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
-      run: docker build dockerize/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
+      run: docker build sleep/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
     - name: Push to Github
       run: |
           docker login docker.pkg.github.com -u $DOCKER_USERNAME -p $GH_AUTH
