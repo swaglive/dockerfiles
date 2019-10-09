@@ -1,0 +1,36 @@
+name: gsutil
+
+on:
+  push:
+    paths:
+    - 'gsutil/**'
+    branches:
+    - 'master'
+
+env: 
+  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/gsutil
+  GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/gsutil
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ['4.9', '4.9-alpine-3.10.2', '4.34']
+    env:
+      GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      GH_AUTH: ${{ secrets.GH_AUTH }}
+      VERSION: ${{ matrix.version }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Docker Image
+      run: docker build gsutil/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
+    - name: Push to Github
+      run: |
+          docker login docker.pkg.github.com -u $DOCKER_USERNAME -p $GH_AUTH
+          docker push $GH_REGISTRY:$VERSION
+    - name: Push to GCR
+      uses: swaglive/actions/gcr/login@master
+      with:
+        args: docker push $GCLOUD_REGISTRY:$VERSION
