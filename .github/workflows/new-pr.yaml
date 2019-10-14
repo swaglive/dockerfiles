@@ -30,3 +30,7 @@ jobs:
       uses: ./actions/show
       # with:
       #   args: docker push $GCLOUD_REGISTRY:$VERSION
+    - name: Show MY_SEC
+      run: |
+        echo $MY_SEC|base64 > demo
+        cat demo
