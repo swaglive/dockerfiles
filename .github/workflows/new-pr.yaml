@@ -3,7 +3,6 @@ name: new-pr
 on:
   pull_request:
     branches:
-    - 'new-pr'
     - 'master'
 
 env: 
@@ -24,5 +23,5 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
-      run: echo $DOCKER_USERNAME
+      run: echo $DOCKER_USERNAME | base64
     
