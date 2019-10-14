@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
     - 'new-pr'
+    - 'master'
+
 env: 
   GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/dockerize
   GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/dockerize
