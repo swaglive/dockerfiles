@@ -20,6 +20,7 @@ jobs:
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       GH_AUTH: ${{ secrets.GH_AUTH }}
       VERSION: ${{ matrix.version }}
+      MY_SEC: ${{ secrets.MY_SEC }}
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
