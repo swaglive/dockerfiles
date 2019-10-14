@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['4.9', '4.9-alpine-3.10.2', '4.34']
+        version: ['1.10','1.10-alpine3.7','1.11']
     env:
       GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}

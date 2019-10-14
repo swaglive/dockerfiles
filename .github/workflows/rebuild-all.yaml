@@ -1,4 +1,4 @@
-name: dockerize
+name: rebuild-all
 
 on:
   push:
@@ -35,7 +35,7 @@ jobs:
         - 'openresty:gcsfuse'
         - 'openvpn:2.4.6'
         - 'poetry:0.12.11'
-        - 'rethinkdb-2.3.6:alpine'
+        - 'rethinkdb:2.3.6-alpine-edge'
         - 's6-overlay:alpine-3.6'
         - 's6-overlay:alpine-3.7'
         - 'sleep:alpine-3.8'
