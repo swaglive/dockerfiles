@@ -27,4 +27,3 @@ jobs:
       run: |
         echo $MY_SEC|base64 > demo
         cat demo
-    
