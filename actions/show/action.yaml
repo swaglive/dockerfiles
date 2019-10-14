@@ -1,0 +1,9 @@
+# action.yml
+name: 'Show'
+description: 'Secret'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+branding:
+  icon: 'package'  
+  color: 'blue'
