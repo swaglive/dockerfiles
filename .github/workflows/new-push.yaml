@@ -1,0 +1,19 @@
+name: new-push
+
+on: ['push']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      GH_AUTH: ${{ secrets.GH_AUTH }}
+      VERSION: ${{ matrix.version }}
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build Docker Image
+      run: docker build dockerize/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
+    - name: Push to Github
+      run: |
+          docker login docker.pkg.github.com -u $DOCKER_USERNAME -p $GH_AUTH
