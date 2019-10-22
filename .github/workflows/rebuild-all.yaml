@@ -44,7 +44,7 @@ jobs:
 
     env:
       GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      GH_USERNAME: ${{ secrets.GH_USERNAME }}
       GH_AUTH: ${{ secrets.GH_AUTH }}
       IMAGE: ${{ matrix.image }}
     steps:
@@ -54,7 +54,7 @@ jobs:
         docker build $(echo $IMAGE | tr ':' '/') --tag $GCLOUD_REGISTRY/$IMAGE --tag $GH_REGISTRY/$IMAGE
     - name: Push to Github
       run: |
-        docker login docker.pkg.github.com -u $DOCKER_USERNAME -p $GH_AUTH
+        docker login docker.pkg.github.com -u $GH_USERNAME -p $GH_AUTH
         docker push $GH_REGISTRY/$IMAGE
     - name: Push to GCR
       uses: swaglive/actions/gcr/login@master
