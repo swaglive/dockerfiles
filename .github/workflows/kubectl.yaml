@@ -7,7 +7,7 @@ on:
     branches:
     - 'master'
 
-env: 
+env:
   GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/kubectl
   GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/kubectl
 
