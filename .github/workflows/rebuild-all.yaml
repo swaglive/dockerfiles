@@ -43,7 +43,6 @@ jobs:
         - 'thumbor:6.6.0-py2'
 
     env:
-      GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
       GH_USERNAME: ${{ secrets.GH_USERNAME }}
       GH_AUTH: ${{ secrets.GH_AUTH }}
       IMAGE: ${{ matrix.image }}

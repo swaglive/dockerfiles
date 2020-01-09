@@ -8,7 +8,6 @@ on:
     - 'master'
 
 env: 
-  GCLOUD_REGISTRY: ${{ secrets.GCLOUD_PROJECT_ID }}/sleep
   GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/sleep
 
 jobs:
@@ -18,19 +17,14 @@ jobs:
       matrix:
         version: ['alpine-3.8']
     env:
-      GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
       GH_USERNAME: ${{ secrets.GH_USERNAME }}
       GH_AUTH: ${{ secrets.GH_AUTH }}
       VERSION: ${{ matrix.version }}
     steps:
     - uses: actions/checkout@v1
     - name: Build Docker Image
-      run: docker build sleep/$VERSION --tag $GCLOUD_REGISTRY:$VERSION --tag $GH_REGISTRY:$VERSION
+      run: docker build sleep/$VERSION --tag $GH_REGISTRY:$VERSION
     - name: Push to Github
       run: |
           docker login docker.pkg.github.com -u $GH_USERNAME -p $GH_AUTH
           docker push $GH_REGISTRY:$VERSION
-    - name: Push to GCR
-      uses: swaglive/actions/gcr/login@master
-      with:
-        args: docker push $GCLOUD_REGISTRY:$VERSION
