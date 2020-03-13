@@ -7,7 +7,7 @@ on:
     branches:
     - 'master'
 
-env: 
+env:
   GH_REGISTRY: docker.pkg.github.com/swaglive/dockerfiles/mongocloud-backup-agent
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ['7.6']
+        version: ['10.12']
     env:
       GH_USERNAME: ${{ secrets.GH_USERNAME }}
       GH_AUTH: ${{ secrets.GH_AUTH }}

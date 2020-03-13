@@ -1,6 +1,6 @@
-FROM        alpine:3.8 as builder
+FROM        alpine as builder
 
-ARG         VERSION=7.6.0.1059-1
+ARG         VERSION=10.12.0.6196-1
 
 RUN         apk add --no-cache --virtual .build-deps \
                 curl ca-certificates && \
@@ -14,7 +14,7 @@ RUN         apk add --no-cache --virtual .build-deps \
 
 ###
 
-FROM        alpine:3.8 as dockerize
+FROM        alpine as dockerize
 
 ARG         DOCKERIZE_VERSION=v0.6.1
 
@@ -24,7 +24,7 @@ RUN         wget -q https://github.com/jwilder/dockerize/releases/download/$DOCK
 
 ###
 
-FROM        debian:9-slim
+FROM        debian:10-slim
 
 VOLUME      /var/lib/mongodb-mms-automation
 VOLUME      /var/log/mongodb-mms-automation
