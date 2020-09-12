@@ -4,6 +4,6 @@
     "async": "^3.1.0",
     "bunyan": "^1.8.12",
     "jsonwebtoken": "^8.5.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   }
 }
